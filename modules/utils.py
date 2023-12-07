@@ -821,8 +821,10 @@ def beautify_err_msg(err_msg):
 
 
 def auth_from_conf(username, password):
+    config_file = os.getenv("CONFIG_FILE", "config.json")
+
     try:
-        with open("config.json", encoding="utf-8") as f:
+        with open(config_file, encoding="utf-8") as f:
             conf = json.load(f)
         usernames, passwords = [i[0] for i in conf["users"]], [
             i[1] for i in conf["users"]

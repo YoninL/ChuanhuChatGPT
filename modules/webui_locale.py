@@ -5,8 +5,10 @@ import commentjson as json
 
 class I18nAuto:
     def __init__(self):
-        if os.path.exists("config.json"):
-            with open("config.json", "r", encoding='utf-8') as f:
+        config_file = os.getenv("CONFIG_FILE", "config.json")
+
+        if os.path.exists(config_file):
+            with open(config_file, "r", encoding='utf-8') as f:
                 config = json.load(f)
         else:
             config = {}

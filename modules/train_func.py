@@ -140,7 +140,9 @@ def add_to_models():
         if i not in presets.MODELS:
             presets.MODELS.append(i)
 
-    with open('config.json', 'r') as f:
+    config_file = os.getenv("CONFIG_FILE", "config.json")
+
+    with open(config_file, 'r') as f:
         data = commentjson.load(f)
     if 'extra_models' in data:
         for i in extra_models:
@@ -148,7 +150,7 @@ def add_to_models():
                 data['extra_models'].append(i)
     else:
         data['extra_models'] = extra_models
-    with open('config.json', 'w') as f:
+    with open(config_file, 'w') as f:
         commentjson.dump(data, f, indent=4)
 
     return gr.update(choices=presets.MODELS), f"成功添加了 {len(succeeded_jobs)} 个模型。"

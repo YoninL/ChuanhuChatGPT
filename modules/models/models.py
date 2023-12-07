@@ -151,7 +151,9 @@ def get_model(
 
 
 if __name__ == "__main__":
-    with open("config.json", "r", encoding="utf-8") as f:
+    config_file = os.getenv("CONFIG_FILE", "config.json")
+
+    with open(config_file, "r", encoding="utf-8") as f:
         openai_api_key = cjson.load(f)["openai_api_key"]
     # set logging level to debug
     logging.basicConfig(level=logging.DEBUG)
